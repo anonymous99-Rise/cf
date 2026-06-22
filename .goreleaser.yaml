@@ -1,8 +1,8 @@
 project_name: cf
 version: 2
 
-env_vars:
-  - GITHUB_TOKEN
+environment:
+  GITHUB_TOKEN:
 
 before:
   hooks:
