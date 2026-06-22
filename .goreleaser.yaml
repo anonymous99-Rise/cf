@@ -5,6 +5,7 @@ before:
   hooks:
     - go mod tidy
     - go generate ./...
+
 builds:
   - env:
       - CGO_ENABLED=0
@@ -16,16 +17,19 @@ builds:
       - 386
       - amd64
       - arm64
+
 archives:
   - name_template: "{{ .ProjectName }}_{{ .Tag }}_{{ .Os }}_{{ .Arch }}"
-    id: homebrew
     format_overrides:
       - goos: windows
         format: zip
+
 checksum:
   name_template: "checksums.txt"
+
 snapshot:
   name_template: "{{ incpatch .Version }}"
+
 changelog:
   sort: asc
   filters:
@@ -34,18 +38,3 @@ changelog:
       - "^doc:"
       - "^ci:"
       - "^Merge pull request"
-brews:
-  - ids:
-      - homebrew
-    name: cf
-    tap:
-      owner: teamssix
-      name: homebrew-tap
-      branch: main
-    folder: Formula
-    url_template: "https://github.com/teamssix/cf/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
-    homepage: "https://wiki.teamssix.com/cf"
-    description: "CF is a cloud exploitation framework, It can facilitate the work of the red team after obtaining access key."
-    skip_upload: auto
-    install: |-
-      bin.install "cf"
