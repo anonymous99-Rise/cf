@@ -1,9 +1,6 @@
 project_name: cf
 version: 2
 
-environment:
-  GITHUB_TOKEN:
-
 before:
   hooks:
     - go mod tidy
